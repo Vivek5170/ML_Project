@@ -68,7 +68,9 @@ Use **Random Forest with SMOTE** when recall is the priority. This ensures that 
 ## 7. Future Work
 
 - Perform **hyperparameter tuning** using GridSearchCV or RandomizedSearchCV to optimize model performance.
+- In results add the performance results of initial implementaion vs results of improved final model.
 - Visualize and analyze **confusion matrix heatmaps** for both CatBoost and Random Forest to better understand model predictions.
+- Consider an **ensemble** that combines CatBoost and Random Forest to balance both accuracy and recall.
 - Save the best-performing models using `joblib` or `pickle` so they can be reused directly without retraining:
   
   ```python
