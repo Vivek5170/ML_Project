@@ -54,6 +54,12 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 
 ---
 
-## 6. Future Work
+## 6. Conclusion
+
+- We enhanced the performance compared to the original research paper, increasing accuracy from 95.75% to 98.47% and recall from 79.81% to 98.88%.
+
+---
+
+## 7. Future Work
 
 - Perform **hyperparameter tuning** using GridSearchCV to optimize model performance.
