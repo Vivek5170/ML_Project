@@ -21,7 +21,15 @@ Using 5-fold cross-validation, Random Forest with SMOTE consistently achieved **
 
 ---
 
-## 3. Model Comparison (with SMOTE)
+## 3. Feature Importance & Binning
+
+Feature importance was analyzed using Random Forest. Features like `Total_Trans_Amt`, `Avg_Utilization_Ratio`, and `Credit_Limit` ranked high.
+
+While some features seemed like good candidates for binning (e.g., `Customer_Age`, `Avg_Open_To_Buy`), manual binning was **not used**. This is because tree-based models already perform **internal optimal splits** on continuous variables. Manual binning would reduce granularity and hinder the model’s ability to capture subtle decision boundaries.
+
+---
+
+## 4. Model Comparison (with SMOTE)
 
 Using the SMOTE-resampled dataset, the following models were trained and evaluated using K-Fold cross-validation:
 
@@ -32,18 +40,7 @@ Using the SMOTE-resampled dataset, the following models were trained and evaluat
 
 Each model performed well. However:
 
-- **CatBoost** achieved the highest **accuracy**
-- **Random Forest** achieved the highest **recall**
-
-This makes Random Forest more favorable in churn scenarios where capturing all potential churned customers is critical.
-
----
-
-## 4. Feature Importance & Binning
-
-Feature importance was analyzed using Random Forest. Features like `Total_Trans_Amt`, `Avg_Utilization_Ratio`, and `Credit_Limit` ranked high.
-
-While some features seemed like good candidates for binning (e.g., `Customer_Age`, `Avg_Open_To_Buy`), manual binning was **not used**. This is because tree-based models already perform **internal optimal splits** on continuous variables. Manual binning would reduce granularity and hinder the model’s ability to capture subtle decision boundaries.
+- **CatBoost** achieved the highest **accuracy** and the highest **recall**
 
 ---
 
@@ -51,29 +48,12 @@ While some features seemed like good candidates for binning (e.g., `Customer_Age
 
 
 - **All models performed very well** thanks to SMOTE improving minority class representation.
-- **CatBoost** achieved the **highest accuracy**.
-- **Random Forest** achieved the **highest recall**, making it ideal for detecting churned customers.
+- **CatBoost** achieved the **highest accuracy** and **highest recall**, making it ideal for detecting churned customers.
 
 In churn prediction tasks, **recall** is often more important than accuracy since **missing a churned customer can be costly**.
-Random Forest slightly outperforms others in recall, making it the best option if the business goal is to detect as many churned customers as possible. CatBoost provides the best balance of accuracy and recall.
 
 ---
 
-## 6. Recommendation
+## 6. Future Work
 
-Use **Random Forest with SMOTE** when recall is the priority. This ensures that the model captures more of the actual churn cases, reducing the risk of losing customers who might have otherwise been retained.
-
----
-
-## 7. Future Work
-
-- Perform **hyperparameter tuning** using GridSearchCV or RandomizedSearchCV to optimize model performance.
-- In results add the performance results of initial implementaion vs results of improved final model.
-- Visualize and analyze **confusion matrix heatmaps** for both CatBoost and Random Forest to better understand model predictions.
-- Consider an **ensemble** that combines CatBoost and Random Forest to balance both accuracy and recall.
-- Save the best-performing models using `joblib` or `pickle` so they can be reused directly without retraining:
-  
-  ```python
-  import joblib
-  joblib.dump(model, 'random_forest_smote.pkl')
-  joblib.dump(catboost_model, 'catboost_smote.pkl')
+- Perform **hyperparameter tuning** using GridSearchCV to optimize model performance.
