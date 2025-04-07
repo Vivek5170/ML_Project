@@ -49,6 +49,7 @@ Each model performed well. However:
 
 - **All models performed very well** thanks to SMOTE improving minority class representation.
 - **CatBoost** achieved the **highest accuracy** and **highest recall**, making it ideal for detecting churned customers.
+- **LightGBM** achieved  the **Second highest recall**, making it ideal if the computing power is low.
 
 In churn prediction tasks, **recall** is often more important than accuracy since **missing a churned customer can be costly**.
 
@@ -56,7 +57,7 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 
 ## 6. Conclusion
 
-- We enhanced the performance compared to the original research paper, increasing accuracy from 95.75% to 98.47% and recall from 79.81% to 98.88%.
+- We enhanced the performance compared to the original research paper, increasing accuracy from 95.75% to 96.69% and recall from 79.81% to 89.54%.
 
 ---
 
