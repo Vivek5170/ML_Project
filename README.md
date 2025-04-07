@@ -57,7 +57,7 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 
 ## 6. Conclusion
 
-- We enhanced the performance compared to the original research paper, increasing accuracy from 95.75% to 96.69% and recall from 79.81% to 89.54%.
+- We enhanced the performance compared to the original research paper, increasing accuracy from 95.71% to 96.69% and recall from 80.12% to 89.54%.
 
 ---
 
