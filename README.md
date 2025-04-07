@@ -15,9 +15,9 @@ All categorical columns such as `Gender`, `Education_Level`, `Marital_Status`, e
 The target variable `Attrition_Flag` was highly imbalanced, with significantly fewer churned customers (value = 1). Two techniques were evaluated:
 
 - Using `class_weight='balanced'` with Random Forest
-- Applying **SMOTE (Synthetic Minority Oversampling Technique)** to oversample the minority class before model training
+- Applying **SMOTE (Synthetic Minority Oversampling Technique)** within each fold of cross-validation using an imblearn.pipeline.Pipeline to oversample the minority class before model training
 
-Using 5-fold cross-validation, Random Forest with SMOTE consistently achieved **higher recall** compared to using class weights. Since the business priority is to minimize false negatives (missed churns), SMOTE was chosen for further modeling.
+Using 5-fold stratified cross-validation, Random Forest with SMOTE (applied within each fold to avoid data leakage) consistently achieved **higher recall** than the class-weighted approach. Since the business objective prioritizes minimizing false negatives (i.e., identifying all potential churns), SMOTE was selected for further modeling.
 
 ---
 
@@ -31,7 +31,7 @@ While some features seemed like good candidates for binning (e.g., `Customer_Age
 
 ## 4. Model Comparison (with SMOTE)
 
-Using the SMOTE-resampled dataset, the following models were trained and evaluated using K-Fold cross-validation:
+Using properly pipelined SMOTE within cross-validation, the following models were trained and evaluated using 5-fold stratified cross-validation:
 
 - Random Forest
 - XGBoost
@@ -40,7 +40,7 @@ Using the SMOTE-resampled dataset, the following models were trained and evaluat
 
 Each model performed well. However:
 
-- **CatBoost** achieved the highest **accuracy** and the highest **recall**
+- **CatBoost** achieved the highest accuracy and recall across folds, making it the top-performing model for churn prediction.
 
 ---
 
