@@ -64,5 +64,4 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 ## 7. Future Work
 
 - Perform **hyperparameter tuning** using GridSearchCV to optimize model performance.
-- Make induvidual code into function for better readability.
 - Try feature engineering.
