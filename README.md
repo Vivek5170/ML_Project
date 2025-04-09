@@ -21,11 +21,30 @@ Using 5-fold stratified cross-validation, Random Forest with SMOTE (applied with
 
 ---
 
-## 3. Feature Importance & Binning
+## 3. Feature Engineering
 
-Feature importance was analyzed using Random Forest. Features like `Total_Trans_Amt`, `Avg_Utilization_Ratio`, and `Credit_Limit` ranked high.
+Based on visual pairplots and feature interaction insights, several **new features** were engineered to capture latent behavior patterns:
 
-While some features seemed like good candidates for binning (e.g., `Customer_Age`, `Avg_Open_To_Buy`), manual binning was **not used**. This is because tree-based models already perform **internal optimal splits** on continuous variables. Manual binning would reduce granularity and hinder the model’s ability to capture subtle decision boundaries.
+- `Trans_Power` = `Total_Trans_Ct` × `Total_Trans_Amt`  
+- `Spending_Efficiency` = `Total_Trans_Amt` / `Total_Trans_Ct`  
+- `Utilization_Gap` = `Credit_Limit` − `Avg_Open_To_Buy`  
+- `Trans_Ct_per_Credit` = `Total_Trans_Ct` / `Credit_Limit`  
+- `Trans_Amt_per_Change` = `Total_Trans_Amt` / `Total_Amt_Chng_Q4_Q1`  
+- `Change_X_Util` = `Total_Ct_Chng_Q4_Q1` × `Avg_Utilization_Ratio`  
+- `Stability_Index` = `Total_Ct_Chng_Q4_Q1` × `Total_Amt_Chng_Q4_Q1`  
+- `Underutilized_Heavy_Spender` = 1 if `Avg_Utilization_Ratio` < 0.2 and `Total_Trans_Amt` > 10000 else 0  
+- `Stable_Low_Use` = 1 if `Total_Ct_Chng_Q4_Q1` < 0.5 and `Total_Trans_Ct` < 30 else 0  
+- `Log_Credit_Limit` = log-transformed `Credit_Limit` to reduce skewness
+
+Removed least important features to prevent cluttering.
+
+### 🧪 Manual Binning (Attempted and Dropped)
+
+Initially, manual binning was explored on features like `Customer_Age` and `Avg_Open_To_Buy`, thinking it could improve interpretability or expose hidden buckets of behavior. However, it was observed that performance slightly dropped.
+
+This is expected because **tree-based models already handle continuous variable splitting efficiently** and don’t benefit from manual discretization, which removes useful variance.
+
+📌 **Conclusion**: Manual binning would reduce granularity and hinder the model’s ability to capture subtle decision boundaries.
 
 ---
 
@@ -57,11 +76,10 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 
 ## 6. Conclusion
 
-- We enhanced the performance compared to the original research paper, increasing accuracy from 95.71% to 96.69% and recall from 80.12% to 89.54%.
+- We enhanced the performance compared to the original research paper, increasing accuracy from 95.71% to 96.50% and recall from 80.12% to 90.46%.
 
 ---
 
 ## 7. Future Work
 
 - Perform **hyperparameter tuning** using GridSearchCV to optimize model performance.
-- Try feature engineering.
