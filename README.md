@@ -63,7 +63,23 @@ Each model performed well. However:
 
 ---
 
-## 5. Results
+## 5. Hyper parameter tuning
+- Hyperparameter Grid: A range of parameters like iterations, learning rate, depth, and regularization were tested to find the best combination.
+- Cross-Validation: StratifiedKFold (5 splits) was used for cross-validation, ensuring the class distribution was maintained.
+- Grid Search: GridSearchCV was used to explore all hyperparameter combinations and select the best one based on recall.
+
+- Best Model: The best parameters were extracted and applied to train a new CatBoost model for testing.
+- Recall: Improved by +0.3%, indicating slightly better detection of the positive class.
+- Accuracy: Decreased by -0.6%, showing a trade-off between recall and overall accuracy.
+
+
+
+### Conclusion:
+- The tuning resulted in a minor improvement in recall at the cost of accuracy. Depending on the problem, this might be a worthwhile trade-off, but further tuning could help balance both metrics better.
+
+---
+
+## 6. Results
 
 
 - **All models performed very well** thanks to SMOTE improving minority class representation.
@@ -74,12 +90,8 @@ In churn prediction tasks, **recall** is often more important than accuracy sinc
 
 ---
 
-## 6. Conclusion
+## 7. Conclusion
 
 - We enhanced the performance compared to the original research paper, increasing accuracy from 95.71% to 96.50% and recall from 80.12% to 90.46%.
 
 ---
-
-## 7. Future Work
-
-- Perform **hyperparameter tuning** using GridSearchCV to optimize model performance.
